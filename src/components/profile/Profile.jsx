@@ -44,7 +44,7 @@ const Profile = () => {
     
     function ProfileData() {
         if (!userId) return;
-        fetch(`http://localhost:3000/profile/${userId}`, {
+        fetch(`https://insta-backend-60gi.onrender.com/profile/${userId}`, {
             method: "get",
             headers: {
                 "Content-Type": "application/json",
