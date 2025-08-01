@@ -7,7 +7,7 @@ import PostDisplay from './PostDisplay';
 
 const Post = () => {
     const [data, setData] = useState([]);
-
+    // const allPosts = data.reverse();
     function submitFormData(e) {
 
         fetch("https://insta-backend-60gi.onrender.com/allpost", {
@@ -18,7 +18,7 @@ const Post = () => {
             }
         })
             .then((res) => res.json())
-            .then((data) => setData(data.posts))
+            .then((data) => { setData(data.posts.reverse()) })
 
     }
     useEffect(() => {
@@ -27,7 +27,6 @@ const Post = () => {
         submitFormData();
     }, [data.posts]);
     // console.log(data);
-    data.reverse()
     return (
         <div className='m-auto'>
             {data.map((post, idx) => <PostDisplay posts={post} key={idx} />)}

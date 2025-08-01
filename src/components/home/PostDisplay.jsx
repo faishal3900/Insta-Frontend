@@ -7,7 +7,7 @@ import { ThemeContext } from '../context/Context';
 import { useNavigate } from 'react-router-dom';
 
 const PostDisplay = (Props, userName) => {
-    const [posts, setPosts] = useState([]);
+    // const [posts, setPosts] = useState([]);
     const [text, setText] = useState("");
     const [selectedPostId, setSelectedPostId] = useState("");
     const [loading, setLoading] = useState(false);
@@ -55,24 +55,24 @@ const PostDisplay = (Props, userName) => {
 
     }
 
-    const fetchPosts = () => {
-        setLoading(true);
-        fetch("https://insta-backend-60gi.onrender.com/allpost", {
-            headers: {
-                "Authorization": "Bearer " + localStorage.getItem("jwt")
-            }
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.posts) setPosts(data.posts);
-            })
-            .catch(err => {
-                console.error("Error fetching posts:", err);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
-    };
+    // const fetchPosts = () => {
+    //     setLoading(true);
+    //     fetch("https://insta-backend-60gi.onrender.com/allpost", {
+    //         headers: {
+    //             "Authorization": "Bearer " + localStorage.getItem("jwt")
+    //         }
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             if (data.posts) setPosts(data.posts);
+    //         })
+    //         .catch(err => {
+    //             console.error("Error fetching posts:", err);
+    //         })
+    //         .finally(() => {
+    //             setLoading(false);
+    //         });
+    // };
 
     const postComment = () => {
 
@@ -101,9 +101,9 @@ const PostDisplay = (Props, userName) => {
             });
     };
 
-    useEffect(() => {
-        fetchPosts();
-    }, []);
+    // useEffect(() => {
+    //     fetchPosts();
+    // }, []);
 
 
     const { dark, toggleTheme, border, setBorder } = useContext(ThemeContext);
