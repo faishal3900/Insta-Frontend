@@ -38,7 +38,7 @@ const SideNavbar = () => {
     const { dark, toggleTheme, following, } = useContext(ThemeContext)
 
     return (
-        <div className={`fixed top-0 bottom-0 left-0 w-16 lg:w-60 border-r border-gray-600 scroll-smooth transition-all duration-300 hidden md:block `} id={dark == true ? "dark" : ""}>
+        <div className={`fixed top-0 bottom-0 left-0 w-16 lg:w-60 border-r border-gray-600 scroll-smooth transition-all duration-300 `} id={dark == true ? "dark" : ""}>
             <ul className=''>
                 <img
                     className='w-8 md:w-45 mb-3 mt-3 pb-4 pt-4 mx-auto md:mx-0 md:pr-3 md:pl-3'
