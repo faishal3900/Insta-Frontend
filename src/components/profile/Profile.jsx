@@ -4,7 +4,7 @@ import { ThemeContext } from '../context/Context';
 import { assets } from '../../assets/assets';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../context/Context";
 
 const Profile = () => {
@@ -12,6 +12,12 @@ const Profile = () => {
     const { id } = useParams(); // URL se ID (if available)
     const { user } = useAuth(); // Logged-in user ka data
     const userId = id || user?._id; // Priority: URL ID > Logged-in I
+
+    console.log(id);
+    console.log(user);
+    console.log(userId);
+
+
 
     const { dark, toggleTheme } = useContext(ThemeContext);
     const [postDatas, setPostDatas] = useState([{
@@ -41,7 +47,7 @@ const Profile = () => {
     }
 
     // const Id = "6871fb95b374d17fe174df64"
-    
+
     function ProfileData() {
         if (!userId) return;
         fetch(`https://insta-backend-60gi.onrender.com/profile/${userId}`, {
@@ -61,38 +67,48 @@ const Profile = () => {
         ProfileData()
     }, [userId])
 
+    const navigate = useNavigate()
+    function navigateHendal() {
+        navigate("/profile/" + user + "/profileedit")
+    }
 
- 
     // console.log(profileDatas.posts);
 
     return (
-        <div className='max-h-full min-h-dvh grid grid-cols-1 gap-4' id={dark == true ? "dark" : ""}>
-            <div className='flex justify-center  '>
-                <div className='w-30 m-20 h-30 rounded-full border-2'>
-                    <img className='w-30 h-30 rounded-full' src={userDatas.pic || null} />
+        <div className='max-h-full min-h-dvh grid grid-cols-1' id={dark == true ? "dark" : ""}>
+            <div className='flex justify-center gap-4 md:gap-9  '>
+                <div className='w-[60px] h-[60px] sm:w-[120px] sm:h-[120px] sm:mb-5 mt-7 rounded-full border-2'>
+                    <img className='w-[60px] h-[60px] sm:w-[120px] sm:h-[120px] rounded-full' src={userDatas.pic || null} />
                 </div>
-                <div className='m-20'>
-                    <div className='flex gap-6'>
-                        <h1 className='font-medium'>{userDatas.name}</h1>
-                        <button className='bg-blue-500 p-1 pl-2 mb-3 pr-2 rounded-lg cursor-pointer' onClick={() => followHendlar(userDatas._id)}>{isFollow ? "Unfollow" : "Follow"}</button>
-                        <button className='bg-gray-700 p-1 pl-2 mb-3 pr-2 rounded-lg cursor-pointer'>Edit Profile</button>
+                <div className='mt-5'>
+                    <div className='text-[12px] items-center sm:flex gap-3 sm:mt-7 lg:text-[18px]'>
+                        <div>
+                            <h1 className='font-medium text-[15px] lg:text-[18px] mb-3'>{userDatas.name}</h1>
+                        </div>
+                        <div>
+                            <button className='bg-blue-500 mr-5 p-1 pl-2 mb-3 pr-2 rounded-lg cursor-pointer' onClick={() => followHendlar(userDatas._id)}>{isFollow ? "Unfollow" : "Follow"}</button>
+                            <button className='bg-gray-700 p-1 pl-2 mb-3 pr-2 rounded-lg cursor-pointer' onClick={navigateHendal}>Edit Profile</button>
+                        </div>
                     </div>
-                    <div className='flex gap-9 '>
-                        <h1>  <span className='font-medium'>{postDatas.length}</span> Posts</h1>
+
+                    <div className='flex gap-6 text-[12px] sm:text-[15px] lg:text-[20px] '>
+                        <h1>  <span className='font-medium '>{postDatas.length}</span> Posts</h1>
                         <h1><span className='font-medium'>{userDatas.followers.length}</span> followers</h1>
                         <h1><span className='font-medium'>{userDatas.following.length}</span> following</h1>
                     </div>
-                    <div>
+                    <div className='text-[12px] sm:text-[15px] font-medium mt-3 lg:text-[20px]'>
                         <h1>{userDatas.name}</h1>
                     </div>
                 </div>
             </div>
-            <div className='justify-end flex'>
-                <hr className=' w-[100%]' />
-            </div>
-            <div className='flex  justify-start flex-wrap mt-5 gap-5 ml-90 mb-10'>
-                {postDatas.map((postD, indx) => {
 
+            <hr className=' w-[100%]' />
+
+            <div className='flex justify-center font-medium text-2xl'>
+                <h1>Post</h1>
+            </div>
+            <div className='flex  justify-center sm:justify-start md:ml-40 lg:ml-90 flex-wrap mt-5 gap-5  mb-10'>
+                {postDatas.map((postD, indx) => {
                     return (
                         <span className='' key={indx}>
                             <img className='w-60' src={postD.photos} alt="" />

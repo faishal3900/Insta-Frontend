@@ -35,6 +35,10 @@ const App = () => {
           path: "/profile/:id",
           element: <Profile />,
         },
+        {
+          path: "/profile/:id/profileedit",
+          element: <Profile />,
+        },
       ]
     },
 

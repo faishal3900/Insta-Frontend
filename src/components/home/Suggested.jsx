@@ -53,9 +53,9 @@ const Suggested = () => {
         navigate("/")
     }
     return (
-        <div className=' ml-40 hidden lg:inline absolute right-3'>
+        <div className=' ml-40 hidden lg:inline absolute right-3 '>
 
-            <div className='flex justify-center items-center max-w-[300px] min-w-[100px] gap-3 mt-7'>
+            <div className='flex justify-center items-center max-w-[280px] min-w-[80px] gap-3 mt-7'>
                 <img src={user.pic} alt="" className='h-12 w-12 rounded-full' />
                 <h2 className='font-medium'>{user.name}</h2>
                 <button className='ml-2.5 font-bold text-red-700' style={{ cursor: "pointer" }} onClick={Logout}>logout</button>

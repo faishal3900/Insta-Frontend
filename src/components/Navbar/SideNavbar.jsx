@@ -18,7 +18,7 @@ const SideNavbar = () => {
     const navigate = useNavigate()
 
     const { user } = useAuth(); // Logged-in user ka data
-    console.log(user.pic);
+    console.log(user);
 
 
     function createHendlar() {
@@ -38,25 +38,25 @@ const SideNavbar = () => {
     const { dark, toggleTheme, following, } = useContext(ThemeContext)
 
     return (
-        <div className={`fixed top-0 bottom-0 left-0 w-16 lg:w-60 border-r border-gray-600 scroll-smooth transition-all duration-300 `} id={dark == true ? "dark" : ""}>
-            <ul className=''>
+        <div className={`sm:fixed sm:top-0 sm:bottom-0 sm:left-0 absolute w-16 lg:w-55 border-r border-gray-600 scroll-smooth transition-all duration-300 justify-center `} id={dark == true ? "dark" : ""}>
+            <ul className='sm:block flex fixed bottom-0 sm:w-15 lg:w-50 bg-black w-full justify-center items-center gap-3'>
                 <img
-                    className='w-8 md:w-45 mb-3 mt-3 pb-4 pt-4 mx-auto md:mx-0 md:pr-3 md:pl-3'
+                    className='sm:inline-block hidden w-8 md:w-45 mb-3 mt-3 pb-4 pt-4 mx-auto md:mx-0 md:pr-3 md:pl-3'
                     src={dark ? assets.Instagram_logo_w : assets.Instagram_logo}
                     alt=""
                 />
 
-                <li onClick={homeHendler} className={`p-2 mb-3 ml-2 mr-2 rounded-lg hSideNav ${navActive === "home" ? "active" : ""}`} style={{ cursor: "pointer" }}>
+                <li onClick={homeHendler} className={` p-2 mt-3 mb-3 ml-2 mr-2 rounded-lg hSideNav ${navActive === "home" ? "active" : ""}`} style={{ cursor: "pointer" }}>
                     <HomeIcon className='md:mr-3' />
                     <span className='hidden lg:inline'>Home</span>
                 </li>
 
-                <li onClick={() => setNavActive("search")} className={`p-2 mb-3 mt-3 ml-2 mr-2 rounded-lg hSideNav ${navActive === "search" ? "active" : ""}`} style={{ cursor: "pointer" }}>
+                <li onClick={() => setNavActive("search")} className={`sm:block hidden p-2 mb-3 mt-3 ml-2 mr-2 rounded-lg hSideNav ${navActive === "search" ? "active" : ""}`} style={{ cursor: "pointer" }}>
                     <SearchIcon className='md:mr-3' />
                     <span className='hidden lg:inline'>Search</span>
                 </li>
 
-                <li onClick={() => setNavActive("Explore")} className={`p-2 mb-3 mt-3 ml-2 mr-2 rounded-lg hSideNav ${navActive === "Explore" ? "active" : ""}`} style={{ cursor: "pointer" }}>
+                <li onClick={() => setNavActive("Explore")} className={`sm:block hidden p-2 mb-3 mt-3 ml-2 mr-2 rounded-lg hSideNav ${navActive === "Explore" ? "active" : ""}`} style={{ cursor: "pointer" }}>
                     <ExploreIcon className='md:mr-3' />
                     <span className='hidden lg:inline'>Explore</span>
                 </li>
@@ -71,7 +71,7 @@ const SideNavbar = () => {
                     <span className='hidden lg:inline'>Messages</span>
                 </li>
 
-                <li onClick={() => setNavActive("Notifications")} className={`p-2 mb-3 mt-3 ml-2 mr-2 rounded-lg hSideNav ${navActive === "Notifications" ? "active" : ""}`} style={{ cursor: "pointer" }}>
+                <li onClick={() => setNavActive("Notifications")} className={`sm:block hidden p-2 mb-3 mt-3 ml-2 mr-2 rounded-lg hSideNav ${navActive === "Notifications" ? "active" : ""}`} style={{ cursor: "pointer" }}>
                     <FavoriteBorderIcon className='md:mr-3' />
                     <span className='hidden lg:inline'>Notifications</span>
                 </li>
@@ -86,7 +86,7 @@ const SideNavbar = () => {
                     <span className='hidden lg:inline'>Profile</span>
                 </li>
 
-                <li onClick={() => logoutHendlar()} className={`p-2 mb-3 mt-3 ml-2 mr-2 rounded-lg hSideNav `} style={{ cursor: "pointer" }}>
+                <li onClick={() => logoutHendlar()} className={`sm:block hidden p-2 mb-3 mt-3 ml-2 mr-2 rounded-lg hSideNav `} style={{ cursor: "pointer" }}>
                     <span className=' text-red-600 font-medium hidden lg:inline'>Logout</span>
                 </li>
             </ul>

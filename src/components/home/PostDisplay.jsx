@@ -128,7 +128,7 @@ const PostDisplay = (Props, userName) => {
 
     return (
         <>
-            <div className={`grid grid-cols-1 items-center sm:w-[450px] p-5 mt-5 w-45 border-2 rounded-2xl border-gray-300 shadow-2x ${dark == true ? "border-gray-900" : ""} `} >
+            <div className={`grid grid-cols-1 items-center sm:w-[420px] p-5 mt-5 w-[300px] border-2 rounded-2xl border-gray-300 shadow-2x ${dark == true ? "border-gray-900" : ""} `} >
 
                 <div onClick={clickHendlar} className='flex items-center mb-3 gap-2  '>
                     <img src={Props.posts.pic} alt="" className='h-8 w-8 rounded-full cursor-pointer' />
