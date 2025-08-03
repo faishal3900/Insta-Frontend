@@ -9,6 +9,7 @@ import Context from '../context/Context'
 const LoginPopup = () => {
     const [currState, setcurrState] = useState("Login")
     const [name, setName] = useState("")
+    const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [loginUserData, setLoginUserData] = useState("")
@@ -50,7 +51,7 @@ const LoginPopup = () => {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ name, email, password })
+                body: JSON.stringify({ name, email, password, username })
             })
                 .then((res) => res.json())
                 .then((data) => console.log(data))
@@ -68,6 +69,9 @@ const LoginPopup = () => {
 
                 <div className="login-popup-input">
                     {currState === "Login" ? <></> : <input type="text" placeholder='Enter name' value={name} onChange={(e) => setName(e.target.value)} required />}
+
+                    {currState === "Login" ? <></> : <input type="text" placeholder='Enter username' value={username} onChange={(e) => setUsername(e.target.value)} required />}
+
                     <input type="email" placeholder='Your email' value={email} onChange={(e) => setEmail(e.target.value)} required />
                     <input type="password" placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </div>

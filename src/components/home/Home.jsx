@@ -20,6 +20,7 @@ const Home = () => {
 
     return (
         <>
+            
             {/* {comment ? <></> : <CommentData />} */}
             <div className='w-full flex justify-end items-center' id={dark == true ? "dark" : ""}>
                 <Switch onClick={toggleTheme} className='p-1.5  mt-3' defaultChecked /><h1 className='mr-8'>Switch</h1>

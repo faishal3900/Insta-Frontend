@@ -5,6 +5,7 @@ import LoginPopup from './components/Login/Login';
 import Create from './components/create/Create';
 import Profile from './components/profile/Profile';
 import AppOutlet from './components/AppOutlet';
+import ProfileEdit from './components/profile/ProfileEdit';
 // import CommentData from './components/comment/CommentData';
 
 
@@ -36,8 +37,8 @@ const App = () => {
           element: <Profile />,
         },
         {
-          path: "/profile/:id/profileedit",
-          element: <Profile />,
+          path: "/profile/:id/profile-edit",
+          element: <ProfileEdit/>,
         },
       ]
     },

@@ -39,7 +39,7 @@ const SideNavbar = () => {
 
     return (
         <div className={`sm:fixed sm:top-0 sm:bottom-0 sm:left-0 absolute w-16 lg:w-55 border-r border-gray-600 scroll-smooth transition-all duration-300 justify-center `} id={dark == true ? "dark" : ""}>
-            <ul className='sm:block flex fixed bottom-0 sm:w-15 lg:w-50 bg-black w-full justify-center items-center gap-3'>
+            <ul className='sm:block flex fixed bottom-0 sm:w-15 lg:w-50  w-full justify-center items-center gap-3'>
                 <img
                     className='sm:inline-block hidden w-8 md:w-45 mb-3 mt-3 pb-4 pt-4 mx-auto md:mx-0 md:pr-3 md:pl-3'
                     src={dark ? assets.Instagram_logo_w : assets.Instagram_logo}

@@ -4,12 +4,14 @@ import { assets } from '../../assets/assets';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import PostDisplay from './PostDisplay';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Post = () => {
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
     // const allPosts = data.reverse();
     function submitFormData(e) {
-
+        setLoading(true);
         fetch("https://insta-backend-60gi.onrender.com/allpost", {
             method: "GET",
             headers: {
@@ -19,6 +21,7 @@ const Post = () => {
         })
             .then((res) => res.json())
             .then((data) => { setData(data.posts.reverse()) })
+            .finally(() => setLoading(false));
 
     }
     useEffect(() => {
@@ -28,9 +31,16 @@ const Post = () => {
     }, [data.posts]);
     // console.log(data);
     return (
-        <div className='m-auto'>
-            {data.map((post, idx) => <PostDisplay posts={post} key={idx} />)}
-        </div>
+        <>
+            {loading && (
+                <div className="m-50 flex h-dvh justify-center">
+                    <CircularProgress color="secondary" />
+                </div>
+            )}
+            <div className='m-auto'>
+                {data.map((post, idx) => <PostDisplay posts={post} key={idx} />)}
+            </div>
+        </>
 
     );
 }
