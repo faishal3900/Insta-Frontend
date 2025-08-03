@@ -31,7 +31,7 @@ const Suggested = () => {
         allUserData()
     }, []);
 
-    const { followId, setFollow, following, followFun, followFiar, setFollowFia, user } = useContext(ThemeContext);
+    const { followId, setFollow, following, followFun, followFiar, setFollowFiar, user } = useContext(ThemeContext);
 
 
 
