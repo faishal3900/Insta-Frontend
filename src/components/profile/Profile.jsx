@@ -116,8 +116,10 @@ const Profile = () => {
                         </div>
                     </div>
                 </div>
+                <div className='flex justify-center'>
 
-                <hr className=' w-[100%]' />
+                    <hr className='w-[60%]' />
+                </div>
 
                 <div className='flex justify-center font-medium text-2xl'>
                     <h1>Post</h1>

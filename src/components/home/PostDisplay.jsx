@@ -10,7 +10,13 @@ const PostDisplay = (Props) => {
     const [text, setText] = useState("");
     const [selectedPostId, setSelectedPostId] = useState("");
 
-    const [postsData, setPostsData] = useState(Props.posts);  // To store updated post data on re-fetch
+    const [postsData, setPostsData] = useState({
+        ...Props.posts,
+        likes: Props.posts?.likes || [],
+        comment: Props.posts?.comment || [],
+    });
+
+
 
     const navigate = useNavigate();
 
@@ -114,10 +120,11 @@ const PostDisplay = (Props) => {
                 <img className='' src={postsData.photos} alt="" />
                 <div className='flex gap-6'>
                     <p onClick={likeHandler} style={{ cursor: "pointer" }}>
-                        {postsData.likes.length} <FavoriteBorderIcon />
+                        {postsData.likes?.length || 0} <FavoriteBorderIcon />
                     </p>
                     <p onClick={comment} style={{ cursor: "pointer" }}>
-                        {postsData.comment.length} <ChatBubbleOutlineOutlinedIcon />
+                        {postsData.comment?.length || 0} <ChatBubbleOutlineOutlinedIcon />
+
                     </p>
                 </div>
                 <h3 className='font-bold'>{postsData.title}</h3>

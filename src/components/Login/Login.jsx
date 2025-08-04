@@ -1,62 +1,30 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './Login.css'
 import { assets } from '../../assets/assets'
 import { useNavigate } from 'react-router-dom'
-import Context from '../context/Context'
+import Context, { ThemeContext } from '../context/Context'
+import { CircularProgress, IconButton } from '@mui/material'
 
 
 
 const LoginPopup = () => {
-    const [currState, setcurrState] = useState("Login")
-    const [name, setName] = useState("")
-    const [username, setUsername] = useState("")
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [loginUserData, setLoginUserData] = useState("")
+    // const [currState, setcurrState] = useState("Login")
+    // const [name, setName] = useState("")
+    // const [username, setUsername] = useState("")
+    // const [email, setEmail] = useState("")
+    // const [password, setPassword] = useState("")
+    // const [loginUserData, setLoginUserData] = useState("")
 
-    console.log(loginUserData);
+    // console.log(loginUserData);
 
+    const { name, setName, username, setUsername, email, setEmail, password, setPassword, loginUserData, setLoginUserData, currState, setcurrState, loginFunction, btnLoading, setBtnLoading } = useContext(ThemeContext)
 
     const navigate = useNavigate()
+
     function submitFormData(e) {
         e.preventDefault()
-        if (currState === "Login") {
-            fetch("https://insta-backend-60gi.onrender.com/singin", {
-                method: "Post",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ email, password })
-            })
-                .then((res) => res.json())
-
-                .then((data) => {
-
-                    // localStorage.setItem("jwt", data.token)
-                    console.log("jwt", data.dbUser._id);
-                    setLoginUserData(data.dbUser)
-                    if (data.token) {
-                        localStorage.setItem("jwt", data.token);
-                        navigate("/home"); // 👈 navigate after success
-
-                    } else {
-                        alert(data.message || "Something went wrong");
-                    }
-
-                })
-
-        } else {
-            fetch("https://insta-backend-60gi.onrender.com/singup", {
-                method: "Post",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ name, email, password, username })
-            })
-                .then((res) => res.json())
-                .then((data) => console.log(data))
-            setcurrState("Login")
-        }
+        loginFunction(navigate)
+        // 👈 navigate after success
     }
     return (
 
@@ -67,6 +35,7 @@ const LoginPopup = () => {
                     <img src={assets.cross_icon} alt="" />
                 </div>
 
+
                 <div className="login-popup-input">
                     {currState === "Login" ? <></> : <input type="text" placeholder='Enter name' value={name} onChange={(e) => setName(e.target.value)} required />}
 
@@ -76,8 +45,11 @@ const LoginPopup = () => {
                     <input type="password" placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </div>
 
+                <button type='submit'>
 
-                <button type='submit' >{currState === "Sign Up" ? "Create account" : "Login"}</button>
+                    {currState === "Sign Up" ? "Create account" : "Login"
+                    }
+                </button>
                 <div className='login-popup-condition'>
                     <input type="checkbox" required />
                     <p>By continuing, i agree to thr terms of use & privacy policy.</p>
