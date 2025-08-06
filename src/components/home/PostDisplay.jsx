@@ -1,31 +1,40 @@
 import React, { useContext, useEffect, useState } from 'react';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import "../../App.css"
 import { ThemeContext } from '../context/Context';
 import { useNavigate } from 'react-router-dom';
-
+import { pink } from '@mui/material/colors';
 
 const PostDisplay = (Props) => {
     const [text, setText] = useState("");
     const [selectedPostId, setSelectedPostId] = useState("");
 
     const [postsData, setPostsData] = useState({
-        ...Props.posts,
-        likes: Props.posts?.likes || [],
-        comment: Props.posts?.comment || [],
+        _id: "",
+        title: "",
+        body: "",
+        photos: "",
+        userName: "",
+        postedBy: "",
+        pic: "",
+        likes: [],
+        comment: [],
+        createdAt: "",
+        ...Props.posts
     });
+
 
 
 
     const navigate = useNavigate();
 
-    const { dark } = useContext(ThemeContext);
+    const { dark, user } = useContext(ThemeContext);
     const [comBtn, setComBtn] = useState(true);
 
     function likeHandler() {
-
-        fetch(`https://insta-backend-60gi.onrender.com/${postsData.likes.includes(localStorage.getItem("userId")) ? 'unlike' : 'like'}`, {
+        fetch(`https://insta-backend-60gi.onrender.com/like`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -35,37 +44,36 @@ const PostDisplay = (Props) => {
         })
             .then((res) => res.json())
             .then((data) => {
-                // update postsData likes after like/unlike
-                setPostsData(data);
+                setPostsData(data.data)
             })
             .catch(err => console.error(err))
-
     }
 
-    const fetchPosts = () => {
 
-        fetch("https://insta-backend-60gi.onrender.com/allpost", {
-            headers: {
-                "Authorization": "Bearer " + localStorage.getItem("jwt")
-            }
-        })
-            .then(res => res.json())
-            .then(data => {
-                // Update the postsData if this post is in the fetched posts list
-                if (data.posts) {
-                    const updatedPost = data.posts.find(post => post._id === postsData._id);
-                    if (updatedPost) setPostsData(updatedPost);
-                }
-            })
-            .catch(err => {
-                console.error("Error fetching posts:", err);
-            })
+    // const fetchPosts = () => {
 
-    };
+    //     fetch("https://insta-backend-60gi.onrender.com/allpost", {
+    //         headers: {
+    //             "Authorization": "Bearer " + localStorage.getItem("jwt")
+    //         }
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             // Update the postsData if this post is in the fetched posts list
+    //             if (data.posts) {
+    //                 const updatedPost = data.posts.find(post => post._id === postsData._id);
+    //                 if (updatedPost) setPostsData(updatedPost);
+    //             }
+    //         })
+    //         .catch(err => {
+    //             console.error("Error fetching posts:", err);
+    //         })
 
-    useEffect(() => {
-        fetchPosts();
-    }, []);
+    // };
+
+    // useEffect(() => {
+    //     fetchPosts();
+    // }, []);
 
     const postComment = () => {
         if (!selectedPostId) return alert("Please select a post");
@@ -85,7 +93,9 @@ const PostDisplay = (Props) => {
             .then(res => res.json())
             .then(data => {
                 setText("");
-                setPostsData(data);  // Update with new comment data
+                setPostsData(data);
+                console.log(data);
+                // Update with new comment data
             })
             .catch(err => console.error("Error posting comment:", err))
 
@@ -120,7 +130,10 @@ const PostDisplay = (Props) => {
                 <img className='' src={postsData.photos} alt="" />
                 <div className='flex gap-6'>
                     <p onClick={likeHandler} style={{ cursor: "pointer" }}>
-                        {postsData.likes?.length || 0} <FavoriteBorderIcon />
+                        {postsData.likes?.length || 0}
+                        {postsData.likes.includes(user._id)
+                            ? <FavoriteIcon sx={{ color: pink[500], }} />
+                            : <FavoriteBorderIcon />}
                     </p>
                     <p onClick={comment} style={{ cursor: "pointer" }}>
                         {postsData.comment?.length || 0} <ChatBubbleOutlineOutlinedIcon />
