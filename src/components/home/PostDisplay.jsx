@@ -11,6 +11,20 @@ const PostDisplay = (Props) => {
     const [text, setText] = useState("");
     const [selectedPostId, setSelectedPostId] = useState("");
 
+    const [postsDataForLike, setPostsDataForLike] = useState({
+        _id: "",
+        title: "",
+        body: "",
+        photos: "",
+        userName: "",
+        postedBy: "",
+        pic: "",
+        comment: [],
+        likes: [],
+        createdAt: "",
+        ...Props.posts
+    });
+
     const [postsData, setPostsData] = useState({
         _id: "",
         title: "",
@@ -19,13 +33,27 @@ const PostDisplay = (Props) => {
         userName: "",
         postedBy: "",
         pic: "",
-        likes: [],
         comment: [],
+        likes: [],
         createdAt: "",
         ...Props.posts
     });
+    const [comData, setComData] = useState({
+        _id: "",
+        title: "",
+        body: "",
+        photos: "",
+        userName: "",
+        postedBy: "",
+        pic: "",
+        comment: [],
+        likes: [],
+        createdAt: "",
+        ...Props.posts
+    })
 
 
+    console.log(comData);
 
 
     const navigate = useNavigate();
@@ -44,7 +72,7 @@ const PostDisplay = (Props) => {
         })
             .then((res) => res.json())
             .then((data) => {
-                setPostsData(data.data)
+                setPostsDataForLike(data.data)
             })
             .catch(err => console.error(err))
     }
@@ -93,7 +121,7 @@ const PostDisplay = (Props) => {
             .then(res => res.json())
             .then(data => {
                 setText("");
-                setPostsData(data);
+                setComData(data.comment);
                 console.log(data);
                 // Update with new comment data
             })
@@ -104,6 +132,7 @@ const PostDisplay = (Props) => {
     const comment = () => {
         if (comBtn) {
             setSelectedPostId(postsData._id);
+            console.log(postsData.id);
             setComBtn(false);
         } else {
             setSelectedPostId("");
@@ -130,13 +159,13 @@ const PostDisplay = (Props) => {
                 <img className='' src={postsData.photos} alt="" />
                 <div className='flex gap-6'>
                     <p onClick={likeHandler} style={{ cursor: "pointer" }}>
-                        {postsData.likes?.length || 0}
-                        {postsData.likes.includes(user._id)
+                        {postsDataForLike.likes?.length || 0}
+                        {postsDataForLike.likes.includes(user._id)
                             ? <FavoriteIcon sx={{ color: pink[500], }} />
                             : <FavoriteBorderIcon />}
                     </p>
                     <p onClick={comment} style={{ cursor: "pointer" }}>
-                        {postsData.comment?.length || 0} <ChatBubbleOutlineOutlinedIcon />
+                        {comData.comment?.length} <ChatBubbleOutlineOutlinedIcon />
 
                     </p>
                 </div>
@@ -147,8 +176,9 @@ const PostDisplay = (Props) => {
                     {selectedPostId && (
                         <div className={`mb-6 w-110 rounded ${dark ? "dark" : ""}`}>
                             <div>
-                                {postsData.comment.map((com, idx) => (
+                                {comData.comment.map((com, idx) => (
                                     <div key={idx} className='flex items-center'>
+                                        {/* {console.log(com)} */}
                                         <img className='w-8 h-8 rounded-4xl m-2' src={com.pic} alt="" />
                                         <h1 className='font-medium'>{com.userName}</h1>
                                         <p> :- {com.text}</p>
