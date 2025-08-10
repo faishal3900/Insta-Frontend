@@ -44,7 +44,7 @@ const ThemeProvider = ({ children, },) => {
                 .then((data) => {
 
                     // localStorage.setItem("jwt", data.token)
-                    console.log("jwt", data.dbUser._id);
+                    // console.log("jwt", data.dbUser._id);
                     setLoginUserData(data.dbUser)
                     if (data.token) {
                         localStorage.setItem("jwt", data.token);
