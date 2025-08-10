@@ -53,7 +53,7 @@ const PostDisplay = (Props) => {
     })
 
 
-    console.log(comData);
+    
 
 
     const navigate = useNavigate();
@@ -146,7 +146,6 @@ const PostDisplay = (Props) => {
 
     return (
         <>
-
             <div className={`grid grid-cols-1 items-center sm:w-[420px] p-5 mt-5 w-[300px] border-2 rounded-2xl border-gray-300 shadow-2x ${(dark) ? "border-gray-900" : ""}`} >
 
                 <div onClick={clickHandler} className='flex items-center mb-3 gap-2'>
