@@ -55,7 +55,6 @@ const ThemeProvider = ({ children, },) => {
                     } else {
                         alert(data.message || "Something went wrong");
                     }
-
                 })
 
         } else {
@@ -64,10 +63,10 @@ const ThemeProvider = ({ children, },) => {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ name, email, password, username })
+                body: JSON.stringify({ name, username, email, password })
             })
                 .then((res) => res.json())
-                .then((data) => console.log(data))
+                .then((data) => console.log(data, "add ho gaya "))
                 .finally(() => setLoading(false));
             setcurrState("Login")
         }
@@ -91,7 +90,7 @@ const ThemeProvider = ({ children, },) => {
     }
     useEffect(() => {
         followFun()
-    }, [followId, followFiar]);
+    }, [followId]);
 
     const [allPostdata, setAllPostData] = useState([]);
     function submitFormData(e) {
