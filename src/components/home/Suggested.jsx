@@ -57,7 +57,7 @@ const Suggested = () => {
         <div className=' ml-40 hidden lg:inline absolute right-3 '>
 
             <div className='flex justify-center items-center max-w-[280px] min-w-[80px] gap-3 mt-7'>
-                <Avatar> <img src={user.pic} alt="" className='h-12 w-12 rounded-full' /></Avatar>
+                <Avatar> <img src={user.pic}  alt="user" className='h-12 w-12 rounded-full' /></Avatar>
                 <h2 className='font-medium'>{user.name}</h2>
                 <button className='ml-2.5 font-bold text-red-700' style={{ cursor: "pointer" }} onClick={Logout}>logout</button>
             </div>
@@ -67,7 +67,7 @@ const Suggested = () => {
 
             {randomUsers.map((User, idx) => {
 
-                const isFollow = Array.isArray(following) && following.includes(User._id);
+                const isFollow = following.includes(User._id);
                 // console.log(User);
                 function profileHandlar() {
                     navigate("/profile/" + User._id)

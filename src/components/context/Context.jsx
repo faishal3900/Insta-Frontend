@@ -45,11 +45,10 @@ const ThemeProvider = ({ children, },) => {
 
                 .then((data) => {
 
-                    // localStorage.setItem("jwt", data.token)
-                    // console.log("jwt", data.dbUser._id);
                     setLoginUserData(data.dbUser)
                     if (data.token) {
                         localStorage.setItem("jwt", data.token);
+                        submitFormData()
                         navigate("/home")
                             .finally(() => setLoading(false));
                     } else {
@@ -58,12 +57,14 @@ const ThemeProvider = ({ children, },) => {
                 })
 
         } else {
+            console.log("try");
+
             fetch("https://insta-backend-60gi.onrender.com/singup", {
                 method: "Post",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ name, username, email, password })
+                body: JSON.stringify({ name, email, password })
             })
                 .then((res) => res.json())
                 .then((data) => console.log(data, "add ho gaya "))
@@ -73,11 +74,13 @@ const ThemeProvider = ({ children, },) => {
     }
 
     function followFun() {
+        const token = localStorage.getItem("jwt");
+        if (!token) return;
         fetch("https://insta-backend-60gi.onrender.com/follow", {
             method: "Put",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("jwt")
+                "Authorization": "Bearer " + token
             },
             body: JSON.stringify({ followId })
         })
@@ -92,16 +95,20 @@ const ThemeProvider = ({ children, },) => {
     }
     useEffect(() => {
         followFun()
+        console.log(following);
+
     }, [followId, followFiar]);
 
     const [allPostdata, setAllPostData] = useState([]);
     function submitFormData(e) {
+        const token = localStorage.getItem("jwt");
         setLoading(true);
+        if (!token) return;
         fetch("https://insta-backend-60gi.onrender.com/allpost", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("jwt")
+                "Authorization": "Bearer " + token
             }
         })
             .then((res) => res.json())
@@ -112,7 +119,7 @@ const ThemeProvider = ({ children, },) => {
     useEffect(() => {
         // console.log("hello");
         submitFormData();
-    }, [allPostdata.posts]);
+    }, []);
 
 
 

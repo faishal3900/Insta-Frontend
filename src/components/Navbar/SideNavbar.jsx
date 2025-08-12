@@ -84,7 +84,7 @@ const SideNavbar = () => {
                 </li>
 
                 <li onClick={() => { setNavActive("Profile"), navigate("/profile/" + user._id) }} className={`p-2 mb-3 mt-3 ml-2 mr-2 rounded-lg hSideNav flex gap-3 items-center ${navActive === "Profile" ? "active" : ""}`} style={{ cursor: "pointer" }}>
-                    <img className='w-10 h-10 rounded-4xl border-2' src={user.pic} alt="" />
+                    <img className='w-10 h-10 rounded-4xl border-2' src={user.pic} alt="user" />
                     <span className='hidden lg:inline'>Profile</span>
                 </li>
 

@@ -17,7 +17,7 @@ const LoginPopup = () => {
 
     // console.log(loginUserData);
 
-    const { name, setName, username, setUsername, email, setEmail, password, setPassword, loginUserData, setLoginUserData, currState, setcurrState, loginFunction, btnLoading, setBtnLoading } = useContext(ThemeContext)
+    const { name, setName, username, setUsername, email, setEmail, password, setPassword, loginUserData, setLoginUserData, currState, setcurrState, loginFunction, btnLoading, setBtnLoading, dark } = useContext(ThemeContext)
 
     const navigate = useNavigate()
 
@@ -28,11 +28,14 @@ const LoginPopup = () => {
     }
     return (
 
-        <div className='login-popup'>
-            <form className="login-popup-container" onSubmit={submitFormData}>
+        <div className='login-popup flex justify-center gap-20 h-dvh items-center' id={dark ? "dark" : ""}>
+            <div className='lg:block hidden'>
+                <img src={assets.loginImg} alt="" />
+            </div>
+            <form className="login-popup-container sm:m-10 m-0" style={{ border: "1px solid" }} id={dark ? "dark" : ""} onSubmit={submitFormData}>
                 <div className="login-popup-title">
-                    <h2>{currState}</h2>
-                    <img src={assets.cross_icon} alt="" />
+                    {/* <h2>{currState}</h2> */}
+                    <img src={assets.Instagram_logo_w} alt="" />
                 </div>
 
 

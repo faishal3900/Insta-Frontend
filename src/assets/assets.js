@@ -4,6 +4,7 @@ import post_img from "../assets/post_img.jpg"
 import dp_img from "../assets/dp_img.jpg"
 import Instagram_logo_w from "../assets/Instagram-White.png"
 import Profile_pic from "../assets/profile_pic.jpg"
+import loginImg from "../assets/insta-CboJTf-s.webp"
 
 export const assets = {
     cross_icon,
@@ -11,5 +12,6 @@ export const assets = {
     post_img,
     dp_img,
     Instagram_logo_w,
-    Profile_pic
+    Profile_pic,
+    loginImg
 }
