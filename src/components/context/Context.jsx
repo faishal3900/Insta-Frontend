@@ -49,6 +49,7 @@ const ThemeProvider = ({ children, },) => {
                     if (data.token) {
                         localStorage.setItem("jwt", data.token);
                         submitFormData()
+                        allUserData()
                         navigate("/home")
                             .finally(() => setLoading(false));
                     } else {
@@ -57,7 +58,6 @@ const ThemeProvider = ({ children, },) => {
                 })
 
         } else {
-            console.log("try");
 
             fetch("https://insta-backend-60gi.onrender.com/singup", {
                 method: "Post",
@@ -121,7 +121,26 @@ const ThemeProvider = ({ children, },) => {
         submitFormData();
     }, []);
 
-
+   
+    const [randomUsers, setRandomUsers] = useState([]);
+    function allUserData() {
+        fetch("https://insta-backend-60gi.onrender.com/alluser", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("jwt")
+            }
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                const shuffled = [...data.user].sort(() => 0.5 - Math.random());
+                setRandomUsers(shuffled.slice(0, 5));
+            }
+            )
+    }
+    useEffect(() => {
+        allUserData()
+    }, []);
 
     return (
         <ThemeContext.Provider value={
@@ -151,7 +170,9 @@ const ThemeProvider = ({ children, },) => {
                 currState, setcurrState,
                 loginFunction,
                 btnLoading,
-                setBtnLoading
+                setBtnLoading,
+
+                randomUsers
             }
         }>
             {children}
