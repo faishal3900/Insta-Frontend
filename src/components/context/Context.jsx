@@ -2,9 +2,9 @@
 
 import React, { createContext, useEffect, useState } from 'react';
 import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 export const ThemeContext = createContext();
+export const useAuth = () => useContext(ThemeContext);
 
 const ThemeProvider = ({ children, },) => {
 
@@ -15,7 +15,7 @@ const ThemeProvider = ({ children, },) => {
     const toggleTheme = () => setDark(!dark);
 
     const [followId, setFollow] = useState()
-    const [following, setFollowing] = useState([''])
+    const [following, setFollowing] = useState(['', '', ''])
     const [followFiar, setFollowFiar] = useState(true)
 
     console.log(following)
@@ -86,11 +86,13 @@ const ThemeProvider = ({ children, },) => {
 
                 setUser(data)
                 setFollowing(data.following)
+                console.log(data);
+
             })
     }
     useEffect(() => {
         followFun()
-    }, [followId]);
+    }, [followId, followFiar]);
 
     const [allPostdata, setAllPostData] = useState([]);
     function submitFormData(e) {
@@ -150,5 +152,4 @@ const ThemeProvider = ({ children, },) => {
     );
 };
 
-export const useAuth = () => useContext(ThemeContext);
 export default ThemeProvider;

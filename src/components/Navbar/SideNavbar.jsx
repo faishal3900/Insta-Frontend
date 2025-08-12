@@ -18,7 +18,11 @@ const SideNavbar = () => {
     const navigate = useNavigate()
 
     const { user } = useAuth(); // Logged-in user ka data
-   
+    console.log(user);
+
+    console.log(navActive);
+
+
     function createHendlar() {
         setNavActive("create")
         navigate("/create")
