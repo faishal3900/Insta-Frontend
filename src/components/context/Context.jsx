@@ -15,7 +15,7 @@ const ThemeProvider = ({ children, },) => {
     const toggleTheme = () => setDark(!dark);
 
     const [followId, setFollow] = useState()
-    const [following, setFollowing] = useState(['', '', ''])
+    const [following, setFollowing] = useState([])
     const [followFiar, setFollowFiar] = useState(true)
 
     console.log(following)
@@ -86,7 +86,7 @@ const ThemeProvider = ({ children, },) => {
 
                 setUser(data)
                 setFollowing(data.following)
-                console.log(data);
+                console.log(data.following);
 
             })
     }

@@ -67,7 +67,7 @@ const Suggested = () => {
 
             {randomUsers.map((User, idx) => {
 
-                const isFollow = following.includes(User._id)
+                const isFollow = Array.isArray(following) && following.includes(User._id);
                 // console.log(User);
                 function profileHandlar() {
                     navigate("/profile/" + User._id)
